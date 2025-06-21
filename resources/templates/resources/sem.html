@@ -1,0 +1,817 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block title %}{% if res.0.semester %}{{ res.0.semester|stringformat:"s"|slice:":10" }}{% endif %} Resource Hub - Ace.DCA{% endblock %}
+{% block meta_description %}Access comprehensive academic resources including previous year papers, books, and video tutorials for {{ res.0.semester|default:"university" }} studies.{% endblock %}
+
+{% block start %}
+<div class="container py-8">
+    <!-- Mobile Header & Filters -->
+    <div class="lg:hidden mb-8">
+        <div class="text-center mb-6">
+            <h1 class="text-2xl sm:text-3xl font-bold mb-2 fade-in-up">
+                {% if res.0.semester %}
+                    <span class="font-mono gradient-text">{{ res.0.semester|stringformat:"s"|slice:":10" }}</span>
+                {% else %}
+                    <span class="font-mono gradient-text">Semester</span>
+                {% endif %}
+                <span class="font-mono">.getResources()</span>
+            </h1>
+            <p class="text-gray-400 font-mono text-sm fade-in-up delay-100">
+                <span class="code-comment">// Access all learning materials</span>
+            </p>
+        </div>
+        
+        <!-- Mobile Filter Controls - Optimized -->
+        <div class="glass rounded-xl p-3 mb-4 fade-in-up delay-200">
+            <div class="grid grid-cols-2 gap-2 mb-3">
+                <button onclick="filterResources('all')" class="mobile-filter-btn active font-mono">
+                    <span class="code-keyword">all</span>
+                </button>
+                <button onclick="filterResources('PYQs')" class="mobile-filter-btn font-mono">
+                    <span class="code-keyword">papers</span>
+                </button>
+                <button onclick="filterResources('Youtube Video URL')" class="mobile-filter-btn font-mono">
+                    <span class="code-keyword">videos</span>
+                </button>
+                <button onclick="filterResources('BOOK')" class="mobile-filter-btn font-mono">
+                    <span class="code-keyword">books</span>
+                </button>
+            </div>
+            <select id="mobileSubjectSelect" class="mobile-subject-select font-mono text-xs" onchange="filterByMobileSubject()">
+                <option value="">// select subject</option>
+                {% for subject in sub %}
+                <option value="{{ subject.subject }}">{{ subject.subject }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    
+    <!-- Desktop Layout -->
+    <div class="dashboard-layout">
+        <!-- Desktop Sidebar -->
+        <aside class="sidebar">
+            <!-- Sidebar Header -->
+            <div class="p-4 border-b border-purple-500/20">
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center glow-purple">
+                        <i data-lucide="folder-open" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-lg font-bold text-white font-mono">Resources</h2>
+                        <p class="text-xs text-gray-400 font-mono">
+                            {% if res.0.semester %}
+                                {{ res.0.semester|stringformat:"s"|slice:":10" }}
+                            {% else %}
+                                Semester Hub
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Filter Section - Optimized -->
+            <div class="p-4 border-b border-purple-500/20">
+                <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 font-mono">
+                    <span class="code-comment">// filter</span>
+                </h3>
+                <div class="space-y-2">
+                    <button onclick="filterResources('all')" class="filter-btn active w-full font-mono">
+                        <span class="flex items-center gap-2">
+                            <i data-lucide="layers" class="w-4 h-4"></i>
+                            <span class="code-keyword">all</span>
+                        </span>
+                        <span class="count-badge" id="count-all">{{ res|length }}</span>
+                    </button>
+                    <button onclick="filterResources('PYQs')" class="filter-btn w-full font-mono">
+                        <span class="flex items-center gap-2">
+                            <i data-lucide="file-text" class="w-4 h-4"></i>
+                            <span class="code-keyword">papers</span>
+                        </span>
+                        <span class="count-badge" id="count-pyqs">0</span>
+                    </button>
+                    <button onclick="filterResources('Youtube Video URL')" class="filter-btn w-full font-mono">
+                        <span class="flex items-center gap-2">
+                            <i data-lucide="play-circle" class="w-4 h-4"></i>
+                            <span class="code-keyword">videos</span>
+                        </span>
+                        <span class="count-badge" id="count-videos">0</span>
+                    </button>
+                    <button onclick="filterResources('BOOK')" class="filter-btn w-full font-mono">
+                        <span class="flex items-center gap-2">
+                            <i data-lucide="book-open" class="w-4 h-4"></i>
+                            <span class="code-keyword">books</span>
+                        </span>
+                        <span class="count-badge" id="count-books">0</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Subjects Section - Optimized for Overflow -->
+            <div class="p-4 flex-grow">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider font-mono">
+                        <span class="code-comment">// subjects</span>
+                    </h3>
+                    <button id="clearSubjectFilter" class="text-xs text-purple-400 hover:text-purple-300 font-mono transition-colors">
+                        clear
+                    </button>
+                </div>
+                <div class="subject-list space-y-0">
+                    {% for subject in sub %}
+                    <div class="subject-item font-mono" data-subject="{{ subject.subject }}">
+                        <span class="text-gray-300 text-xs truncate block">{{ subject.subject }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <!-- Back Button -->
+            <div class="p-4 border-t border-purple-500/20">
+                <a href="javascript:history.back()" class="flex items-center text-gray-400 hover:text-white transition-colors font-mono text-xs">
+                    <i data-lucide="arrow-left" class="w-3 h-3 mr-2"></i>
+                    <span class="code-keyword">return</span>
+                </a>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="flex-1">
+            <!-- Desktop Header -->
+            <div class="hidden lg:block mb-6 fade-in-up">
+                <h1 class="text-3xl md:text-4xl font-bold mb-2">
+                    {% if res.0.semester %}
+                        <span class="font-mono gradient-text">{{ res.0.semester|stringformat:"s"|slice:":10" }}</span>
+                    {% else %}
+                        <span class="font-mono gradient-text">Semester</span>
+                    {% endif %}
+                    <span class="font-mono">.getResources()</span>
+                </h1>
+                <p class="text-gray-400 font-mono text-sm">
+                    <span class="code-comment">// Access all learning materials</span>
+                </p>
+            </div>
+            
+            <!-- Search Bar -->
+            <div class="hidden lg:block mb-6 fade-in-up delay-100">
+                <div class="relative max-w-md">
+                    <input 
+                        type="text" 
+                        id="searchInput"
+                        placeholder="// search resources..."
+                        class="w-full glass rounded-lg px-4 py-3 pl-10 text-white font-mono text-sm focus:outline-none focus:border-purple-500 transition-colors"
+                        oninput="searchResources()"
+                    >
+                    <i data-lucide="search" class="w-4 h-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2"></i>
+                </div>
+            </div>
+            
+            <!-- Resources Grid -->
+            <div id="resource-list" class="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 fade-in-up delay-200">
+                {% for info in res %}
+                    {% if not info.is_ignored %} <!-- Ignore resources that are marked as ignored -->
+                        <div class="resource-card glass-hover" data-type="{{ info.resource_type }}" data-subject="{{ info.subject }}" data-title="{{ info.subject|lower }}">
+                            <div class="p-5">
+                                <!-- Resource Type Badge -->
+                                <div class="resource-type-badge mb-4">
+                                    <div class="resource-type-icon {% if info.resource_type == 'PYQs' %}type-pdf{% elif info.resource_type == 'BOOK' %}type-book{% elif info.resource_type == 'Youtube Video URL' %}type-video{% endif %}">
+                                        {% if info.resource_type == "PYQs" %}
+                                            <i data-lucide="file-text" class="w-4 h-4"></i>
+                                        {% elif info.resource_type == "BOOK" %}
+                                            <i data-lucide="book-open" class="w-4 h-4"></i>
+                                        {% elif info.resource_type == "Youtube Video URL" %}
+                                            <i data-lucide="play-circle" class="w-4 h-4"></i>
+                                        {% endif %}
+                                    </div>
+                                    <span class="font-mono text-xs font-semibold">
+                                        {% if info.resource_type == "PYQs" %}
+                                            <span class="code-keyword">prev</span>_paper
+                                        {% elif info.resource_type == "BOOK" %}
+                                            <span class="code-keyword">book</span>
+                                        {% elif info.resource_type == "Youtube Video URL" %}
+                                            <span class="code-keyword">video</span>
+                                        {% else %}
+                                            {{ info.resource_type|lower }}
+                                        {% endif %}
+                                    </span>
+                                </div>
+                                
+                                <!-- Resource Title -->
+                                <h3 class="text-lg font-bold text-white mb-3 font-mono leading-tight">
+                                    {{ info.subject }}
+                                </h3>
+                                
+                                <!-- Resource Meta -->
+                                <div class="flex items-center text-xs text-gray-400 mb-4 font-mono">
+                                    {% if info.resource_type == "PYQs" and info.resource_file_year %}
+                                        <i data-lucide="calendar" class="w-3 h-3 mr-1"></i>
+                                        <span class="code-comment">// year:</span> {{ info.resource_file_year }}
+                                    {% elif info.url_source %}
+                                        <i data-lucide="link" class="w-3 h-3 mr-1"></i>
+                                        <span class="code-comment">// source:</span> {{ info.url_source|truncatechars:15 }}
+                                    {% else %}
+                                        <i data-lucide="file" class="w-3 h-3 mr-1"></i>
+                                        <span class="code-comment">// resource available</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <!-- Card Actions - KEEPING BOTH PREVIEW AND DOWNLOAD -->
+                            <div class="card-actions p-4 pt-0">
+                                {% if info.resource_type == "PYQs" or info.resource_type == "BOOK" %}
+                                    {% if info.resource_file %}
+                                        <a href="{{ info.resource_file.url }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline flex-1 font-mono">
+                                            <i data-lucide="eye" class="w-4 h-4"></i>
+                                            Preview
+                                        </a>
+                                        <a href="{{ info.resource_file.url }}" download class="btn btn-primary flex-1 font-mono">
+                                            <i data-lucide="download" class="w-4 h-4"></i>
+                                            Download
+                                        </a>
+                                    {% else %}
+                                        <span class="btn btn-outline flex-1 font-mono cursor-not-allowed opacity-50">
+                                            <i data-lucide="eye-off" class="w-4 h-4"></i>
+                                            Not Available
+                                        </span>
+                                    {% endif %}
+                                
+                                {% elif info.resource_type == "Youtube Video URL" %}
+                                    {% if info.resource_url %}
+                                        <a href="{{ info.resource_url }}" target="_blank" class="btn btn-primary w-full font-mono">
+                                            <i data-lucide="play" class="w-4 h-4"></i>
+                                            Watch
+                                        </a>
+                                    {% else %}
+                                        <span class="btn btn-outline w-full font-mono cursor-not-allowed opacity-50">
+                                            <i data-lucide="x-circle" class="w-4 h-4"></i>
+                                            Unavailable
+                                        </span>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                            
+                        </div>
+                    {% endif %}
+                {% empty %}
+                <div class="col-span-full empty-state">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-xl bg-gray-700/50 flex items-center justify-center">
+                        <i data-lucide="folder-x" class="w-8 h-8 text-gray-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2 font-mono">
+                        <span class="code-keyword">null</span> resources found
+                    </h3>
+                    <p class="text-gray-400 font-mono text-sm max-w-md mx-auto">
+                        <span class="code-comment">// We're currently working on adding resources for this semester</span>
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <!-- No Results Message -->
+            <div id="noResultsMessage" class="hidden empty-state mt-8">
+                <div class="w-16 h-16 mx-auto mb-6 rounded-xl bg-gray-700/50 flex items-center justify-center">
+                    <i data-lucide="search-x" class="w-8 h-8 text-gray-400"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2 font-mono">
+                    <span class="code-keyword">no</span> matching resources
+                </h3>
+                <p class="text-gray-400 font-mono text-sm max-w-md mx-auto">
+                    <span class="code-comment">// Try adjusting your filters or search terms</span>
+                </p>
+            </div>
+            
+            <!-- Resource Count -->
+            <div class="mt-8 text-center fade-in-up delay-300">
+                <p id="resourceCount" class="text-gray-400 font-mono text-sm">
+                    <span class="code-comment">// showing</span> 
+                    <span class="text-purple-400 font-medium">{{ res|length }}</span> 
+                    <span class="code-comment">resources</span>
+                </p>
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- Toast Notification -->
+<div id="toast" class="toast">
+    <i data-lucide="check-circle" class="w-5 h-5 text-green-400"></i>
+    <span id="toastMessage" class="font-mono">Download started</span>
+</div>
+
+<style>
+    /* Dashboard Layout */
+    .dashboard-layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    @media (min-width: 1024px) {
+        .dashboard-layout {
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+        }
+    }
+    
+    /* Enhanced Sidebar */
+    .sidebar {
+        background: var(--glass-bg);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid var(--glass-border);
+        border-radius: 16px;
+        height: calc(100vh - 3rem);
+        position: sticky;
+        top: 1.5rem;
+        overflow: hidden;
+        flex-direction: column;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        display: none;
+    }
+    
+    @media (min-width: 1024px) {
+        .sidebar {
+            display: flex;
+        }
+    }
+    
+    /* Resource Cards */
+    .resource-card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid var(--glass-border);
+        border-radius: 16px;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .resource-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(139, 92, 246, 0.4);
+        box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
+    }
+    
+    /* Resource Type Badges */
+    .resource-type-badge {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+    
+    .resource-type-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+    
+    .type-pdf {
+        color: #f87171;
+        background: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+    
+    .type-video {
+        color: #60a5fa;
+        background: rgba(59, 130, 246, 0.1);
+        border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+    
+    .type-book {
+        color: #34d399;
+        background: rgba(16, 185, 129, 0.1);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    
+    /* Filter Buttons - Optimized */
+    .filter-btn {
+        transition: all 0.3s ease;
+        border: 1px solid var(--glass-border);
+        background: rgba(30, 41, 59, 0.4);
+        color: var(--text-secondary);
+        padding: 0.5rem 0.75rem;
+        border-radius: 10px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .filter-btn:hover {
+        background: rgba(139, 92, 246, 0.1);
+        border-color: rgba(139, 92, 246, 0.3);
+        color: var(--text-primary);
+        transform: translateX(4px);
+    }
+    
+    .filter-btn.active {
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.1));
+        border-color: rgba(139, 92, 246, 0.4);
+        color: white;
+        box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
+    }
+    
+    .count-badge {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        padding: 0.15rem 0.4rem;
+        border-radius: 6px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        min-width: 1.5rem;
+        text-align: center;
+    }
+    
+    /* Subject List - Optimized for Overflow */
+    .subject-list {
+        max-height: calc(100vh - 20rem);
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(139, 92, 246, 0.3) transparent;
+    }
+    
+    .subject-item {
+        transition: all 0.3s ease;
+        border-left: 2px solid transparent;
+        padding: 0.5rem 0.75rem;
+        cursor: pointer;
+        border-radius: 0 8px 8px 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .subject-item:hover {
+        background: rgba(139, 92, 246, 0.1);
+        border-left-color: rgba(139, 92, 246, 0.5);
+        transform: translateX(4px);
+    }
+    
+    .subject-item.active {
+        background: rgba(139, 92, 246, 0.15);
+        border-left-color: var(--accent-purple);
+        color: white;
+    }
+    
+    /* Card Actions - KEEPING BOTH BUTTONS */
+    .card-actions {
+        display: flex;
+        gap: 0.75rem;
+        margin-top: auto;
+        padding: 1rem;
+        border-top: 1px solid var(--glass-border);
+    }
+    
+    .btn {
+        transition: all 0.3s ease;
+        border-radius: 8px;
+        font-weight: 500;
+        font-size: 0.875rem;
+        padding: 0.75rem 1rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        text-decoration: none;
+        border: none;
+    }
+    
+    .btn-primary {
+        background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+        color: white;
+        box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+        color: white;
+        text-decoration: none;
+    }
+    
+    .btn-outline {
+        background: transparent;
+        color: var(--text-secondary);
+        border: 1px solid var(--glass-border);
+    }
+    
+    .btn-outline:hover {
+        background: rgba(139, 92, 246, 0.1);
+        border-color: rgba(139, 92, 246, 0.3);
+        color: white;
+        text-decoration: none;
+        transform: translateY(-2px);
+    }
+    
+    /* Mobile Filter Buttons - Optimized */
+    .mobile-filter-btn {
+        padding: 0.5rem;
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: 8px;
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+        font-size: 0.75rem;
+    }
+    
+    .mobile-filter-btn:hover {
+        background: rgba(139, 92, 246, 0.1);
+        border-color: rgba(139, 92, 246, 0.3);
+        color: var(--text-primary);
+    }
+    
+    .mobile-filter-btn.active {
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.1));
+        border-color: rgba(139, 92, 246, 0.4);
+        color: white;
+    }
+    
+    .mobile-subject-select {
+        width: 100%;
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: 8px;
+        color: white;
+        padding: 0.5rem 0.75rem;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+        background-position: right 0.75rem center;
+        background-repeat: no-repeat;
+        background-size: 1.25em 1.25em;
+        font-size: 0.75rem;
+    }
+    
+    /* Empty State */
+    .empty-state {
+        padding: 3rem;
+        text-align: center;
+        background: var(--glass-bg);
+        border: 1px dashed var(--glass-border);
+        border-radius: 16px;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+    
+    /* Toast Notification */
+    .toast {
+        position: fixed;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--glass-bg);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid var(--glass-border);
+        border-left: 4px solid var(--accent-green);
+        border-radius: 12px;
+        padding: 1rem 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        z-index: 50;
+        opacity: 0;
+        transition: all 0.3s ease;
+        transform: translateX(-50%) translateY(20px);
+    }
+    
+    .toast.active {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    
+    /* Mobile Responsive */
+    @media (max-width: 1023px) {
+        .sidebar {
+            display: none !important;
+        }
+        
+        .dashboard-layout {
+            grid-template-columns: 1fr;
+        }
+        
+        .card-actions {
+            flex-direction: column;
+        }
+        
+        .card-actions .btn {
+            width: 100%;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+        
+        updateResourceCounts();
+        initializeEventListeners();
+        
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            observer.observe(el);
+        });
+    });
+    
+    function initializeEventListeners() {
+        const subjectItems = document.querySelectorAll('.subject-item');
+        subjectItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const subject = this.dataset.subject;
+                filterBySubject(subject);
+                
+                subjectItems.forEach(si => si.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        const clearBtn = document.getElementById('clearSubjectFilter');
+        if (clearBtn) {
+            clearBtn.addEventListener('click', function() {
+                subjectItems.forEach(si => si.classList.remove('active'));
+                const activeFilterBtn = document.querySelector('.filter-btn.active');
+                const activeFilterType = activeFilterBtn ? 
+                    activeFilterBtn.getAttribute('onclick').match(/'([^']+)'/)[1] : 'all';
+                filterResources(activeFilterType);
+                
+                const mobileSubjectSelect = document.getElementById('mobileSubjectSelect');
+                if (mobileSubjectSelect) {
+                    mobileSubjectSelect.value = '';
+                }
+            });
+        }
+    }
+    
+    function updateResourceCounts() {
+        const allResources = document.querySelectorAll('.resource-card');
+        const pyqsResources = document.querySelectorAll('.resource-card[data-type="PYQs"]');
+        const videoResources = document.querySelectorAll('.resource-card[data-type="Youtube Video URL"]');
+        const bookResources = document.querySelectorAll('.resource-card[data-type="BOOK"]');
+        
+        const countAll = document.getElementById('count-all');
+        const countPyqs = document.getElementById('count-pyqs');
+        const countVideos = document.getElementById('count-videos');
+        const countBooks = document.getElementById('count-books');
+        
+        if (countAll) countAll.textContent = allResources.length;
+        if (countPyqs) countPyqs.textContent = pyqsResources.length;
+        if (countVideos) countVideos.textContent = videoResources.length;
+        if (countBooks) countBooks.textContent = bookResources.length;
+    }
+    
+    function searchResources() {
+        const searchInput = document.getElementById('searchInput');
+        const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+        const allCards = document.querySelectorAll('.resource-card');
+        let visibleCount = 0;
+        
+        allCards.forEach(card => {
+            const title = card.dataset.title || '';
+            const subject = card.dataset.subject.toLowerCase();
+            
+            if (title.includes(searchTerm) || subject.includes(searchTerm)) {
+                card.style.display = 'flex';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+        
+        updateResourceCount(visibleCount);
+        toggleNoResultsMessage(visibleCount, allCards.length);
+    }
+    
+    function filterResources(type) {
+        const activeSubject = document.querySelector('.subject-item.active');
+        const subjectFilter = activeSubject ? activeSubject.dataset.subject : '';
+        const searchInput = document.getElementById('searchInput');
+        const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+        
+        filterResourcesByTypeAndSubject(type, subjectFilter, searchTerm);
+        
+        document.querySelectorAll('.filter-btn, .mobile-filter-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        document.querySelectorAll(`button[onclick="filterResources('${type}')"]`).forEach(btn => {
+            btn.classList.add('active');
+        });
+    }
+    
+    function filterByMobileSubject() {
+        const mobileSubjectSelect = document.getElementById('mobileSubjectSelect');
+        const subject = mobileSubjectSelect ? mobileSubjectSelect.value : '';
+        
+        const activeMobileFilterBtn = document.querySelector('.mobile-filter-btn.active');
+        const type = activeMobileFilterBtn ? 
+            activeMobileFilterBtn.getAttribute('onclick').match(/'([^']+)'/)[1] : 'all';
+        
+        const searchInput = document.getElementById('searchInput');
+        const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+        
+        filterResourcesByTypeAndSubject(type, subject, searchTerm);
+    }
+    
+    function filterBySubject(subject) {
+        const activeFilterBtn = document.querySelector('.filter-btn.active');
+        const activeFilterType = activeFilterBtn ? 
+            activeFilterBtn.getAttribute('onclick').match(/'([^']+)'/)[1] : 'all';
+        
+        const searchInput = document.getElementById('searchInput');
+        const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+        
+        filterResourcesByTypeAndSubject(activeFilterType, subject, searchTerm);
+    }
+    
+    function filterResourcesByTypeAndSubject(type, subject, searchTerm = '') {
+        const allCards = document.querySelectorAll('.resource-card');
+        let visibleCount = 0;
+        
+        allCards.forEach(card => {
+            const cardType = card.dataset.type;
+            const cardSubject = card.dataset.subject;
+            const cardTitle = card.dataset.title || '';
+            
+            const matchesType = type === 'all' || cardType === type;
+            const matchesSubject = subject === '' || cardSubject === subject;
+            const matchesSearch = searchTerm === '' || 
+                cardTitle.includes(searchTerm) || 
+                cardSubject.toLowerCase().includes(searchTerm);
+            
+            if (matchesType && matchesSubject && matchesSearch) {
+                card.style.display = 'flex';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+        
+        updateResourceCount(visibleCount);
+        toggleNoResultsMessage(visibleCount, allCards.length);
+    }
+    
+    function updateResourceCount(count) {
+        const resourceCount = document.getElementById('resourceCount');
+        if (resourceCount) {
+            resourceCount.innerHTML = `<span class="code-comment">// showing</span> <span class="text-purple-400 font-medium">${count}</span> <span class="code-comment">resources</span>`;
+        }
+    }
+    
+    function toggleNoResultsMessage(visibleCount, totalCount) {
+        const noResultsMessage = document.getElementById('noResultsMessage');
+        if (noResultsMessage) {
+            if (visibleCount === 0 && totalCount > 0) {
+                noResultsMessage.classList.remove('hidden');
+            } else {
+                noResultsMessage.classList.add('hidden');
+            }
+        }
+    }
+    
+    function showToast(message, type = 'success') {
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+        
+        toastMessage.textContent = message;
+        toast.classList.add('active');
+        
+        if (type === 'error') {
+            toast.style.borderLeftColor = '#ef4444';
+        } else {
+            toast.style.borderLeftColor = '#10b981';
+        }
+        
+        setTimeout(() => {
+            toast.classList.remove('active');
+        }, 3000);
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,13 @@
+{
+  "name": "ace-aws-ec2",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tailwindcss -i ./static/input.css -o ./static/css/output.css --minify",
+    "watch": "tailwindcss -i ./static/input.css -o ./static/css/output.css --watch"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.17"
+  }
+}

@@ -1,0 +1,1325 @@
+{% load static tailwind_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Ace DCA - Academic Resources Hub{% endblock %}</title>
+  
+    <!-- Tailwind CSS -->
+    {% tailwind_css %}
+  
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'images/acedca.svg' %}" sizes="56x56" type="image/svg+xml">
+    <link rel="icon" type="image/svg+xml" href="https://minio.acedca.in/my-favicon/favicon.svg" />
+    <link rel="shortcut icon" href="https://minio.acedca.in/my-favicon/favicon.ico" />
+    <meta name="apple-mobile-web-app-title" content="Ace Dca" />
+    <link rel="apple-touch-icon" sizes="57x57" href="https://minio.acedca.in/my-favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="https://minio.acedca.in/my-favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://minio.acedca.in/my-favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://minio.acedca.in/my-favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://minio.acedca.in/my-favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://minio.acedca.in/my-favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://minio.acedca.in/my-favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://minio.acedca.in/my-favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://minio.acedca.in/my-favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="https://minio.acedca.in/my-favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://minio.acedca.in/my-favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="https://minio.acedca.in/my-favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://minio.acedca.in/my-favicon/favicon-16x16.png">
+    <link rel="manifest" href="https://minio.acedca.in/my-favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+  
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="{% block meta_description %}Ace DCA is a centralized academic portal for BSc (Hons) Computer Science students at CCS University, Meerut. Explore syllabi, previous year papers, and lecture notes curated by the Department of Computer Applications (DCA).{% endblock %}">
+    <meta name="keywords" content="{% block meta_keywords %}Ace DCA, CCS University, BSc Hons Computer Science, DCA Department, Computer Applications, Syllabus, Previous Year Papers, Notes{% endblock %}">
+    <meta name="author" content="Jatin Gera>
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{% block canonical_url %}https://acedca.in{% endblock %}">
+  
+    <!-- Open Graph Meta -->
+    <meta property="og:title" content="{% block og_title %}Ace DCA – BSc (Hons) Computer Science Resources Hub{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Access study material, Previous Year papers, and academic resources for BSc (Hons) Computer Science at CCSU, developed by Jatin Gera ACEDCA.{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}https://minio.acedca.in/media/og.png{% endblock %}">
+    <meta property="og:url" content="{% block og_url %}https://acedca.in{% endblock %}">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="Ace DCA">
+  
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% block twitter_title %}Ace DCA – BSc (Hons) CS Study Portal{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}Your go-to academic portal for BSc (Hons) Computer Science at CCSU. Built by students, for students.{% endblock %}">
+    <meta name="twitter:image" content="{% block twitter_image %}https://minio.acedca.in/media/twitter.png{% endblock %}">
+  
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+        {
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "Ace DCA",
+      "url": "https://acedca.in",
+      "logo": "https://minio.acedca.in/media/acedcalogo.png",
+      "description": "Academic resource platform for BSc (Hons) Computer Science students at CCS University under the Department of Computer Applications.",
+      "sameAs": [
+        "https://www.linkedin.com/in/jatin-gera",
+        "https://github.com/stdygit"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Meerut",
+        "addressRegion": "Uttar Pradesh",
+        "addressCountry": "IN"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "email": "acedca.ac@gmail.com"
+      },
+      "department": {
+        "@type": "EducationalOccupationalProgram",
+        "educationalProgramMode": "online",
+        "name": "BSc (Hons) Computer Science",
+        "provider": {
+          "@type": "CollegeOrUniversity",
+          "name": "CCS University",
+          "url": "https://ccsuniversity.ac.in"
+        }
+      }
+    }
+    </script>
+  
+    <!-- Developer Credit -->
+    <meta name="author" content="Developed by Jatin Gera">
+    <link rel="author" href="https://acedca.in/aboutdev/">
+
+    <!-- Developer Attribution -->
+    <meta name="designer" content="Jatin Gera">
+    <meta name="developer" content="Jatin Gera">
+    <link rel="author" href="https://acedca.in/aboutdev/">
+  
+</head>
+  
+  
+
+
+<style>
+    :root {
+        --bg-primary: #0d1117;
+        --bg-secondary: #161b22;
+        --bg-tertiary: #21262d;
+        --text-primary: #f0f6fc;
+        --text-secondary: #8b949e;
+        --text-muted: #6e7681;
+        --accent-purple: #8b5cf6;
+        --accent-pink: #ec4899;
+        --accent-blue: #58a6ff;
+        --accent-green: #3fb950;
+        --border-color: rgba(240, 246, 252, 0.1);
+        --glass-bg: rgba(22, 27, 34, 0.6);
+        --glass-border: rgba(240, 246, 252, 0.15);
+        --shadow-color: rgba(0, 0, 0, 0.3);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        min-height: 100vh;
+        overflow-x: hidden;
+        position: relative;
+        line-height: 1.6;
+    }
+
+    /* Optimized Background Pattern */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: 
+            radial-gradient(circle at 1px 1px, rgba(88, 166, 255, 0.08) 1px, transparent 0);
+        background-size: 20px 20px;
+        z-index: -2;
+        will-change: transform;
+        transform: translateZ(0);
+    }
+
+    /* Optimized Gradient Overlay */
+    body::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: 
+            radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.06) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.06) 0%, transparent 50%),
+            radial-gradient(circle at 40% 80%, rgba(88, 166, 255, 0.06) 0%, transparent 50%);
+        z-index: -1;
+        will-change: transform;
+        transform: translateZ(0);
+    }
+
+    /* Typography */
+    .font-mono {
+        font-family: 'JetBrains Mono', monospace;
+        font-feature-settings: 'liga' 1, 'calt' 1;
+    }
+
+    /* LCP Optimized Hero Heading */
+    .hero-heading {
+        min-height: 200px;
+        font-display: swap;
+        will-change: transform;
+        transform: translateZ(0);
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    /* Optimized Glass Morphism */
+    .glass {
+        background: var(--glass-bg);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid var(--glass-border);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .glass-hover {
+        transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+        will-change: transform;
+    }
+
+    .glass-hover:hover {
+        background: rgba(22, 27, 34, 0.8);
+        border-color: rgba(240, 246, 252, 0.25);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Optimized Gradient Text */
+    .gradient-text {
+        background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        background-size: 200% 200%;
+        animation: gradientShift 4s ease infinite;
+        will-change: background-position;
+        transform: translateZ(0);
+    }
+
+    @keyframes gradientShift {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+    }
+
+    /* Optimized Glow Effects */
+    .glow-purple {
+        box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+    }
+
+    .glow-pink {
+        box-shadow: 0 0 15px rgba(236, 72, 153, 0.3);
+    }
+
+    .glow-blue {
+        box-shadow: 0 0 15px rgba(88, 166, 255, 0.3);
+    }
+
+    /* Optimized Navigation */
+    .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(13, 17, 23, 0.95);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border-color);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1rem;
+    }
+
+    .nav-link {
+        position: relative;
+        color: var(--text-secondary);
+        transition: color 0.3s ease;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.875rem;
+        padding: 0.5rem 0;
+        text-decoration: none;
+    }
+
+    .nav-link:hover {
+        color: var(--text-primary);
+    }
+
+    .nav-link.active {
+        color: var(--accent-blue);
+    }
+
+    .nav-link.active::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink));
+        border-radius: 1px;
+    }
+
+    /* Optimized Buttons */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 500;
+        font-size: 0.875rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        border: none;
+        text-decoration: none;
+        font-family: 'JetBrains Mono', monospace;
+        position: relative;
+        overflow: hidden;
+        will-change: transform;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+        color: white;
+        box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+        text-decoration: none;
+        color: white;
+    }
+
+    .btn-outline {
+        background: transparent;
+        color: var(--text-primary);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+    }
+
+    .btn-outline:hover {
+        background: var(--glass-bg);
+        border-color: var(--accent-purple);
+        transform: translateY(-2px);
+        text-decoration: none;
+        color: var(--text-primary);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Google Button Styles */
+    .btn-google {
+        background: white;
+        color: #1f2937;
+        border: 1px solid #e5e7eb;
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .btn-google:hover {
+        background: #f9fafb;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        color: #1f2937;
+        text-decoration: none;
+    }
+
+    .btn-google svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    /* Optimized Cards */
+    .card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid var(--glass-border);
+        border-radius: 16px;
+        transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        will-change: transform;
+    }
+
+    .card:hover {
+        background: rgba(22, 27, 34, 0.8);
+        border-color: rgba(240, 246, 252, 0.25);
+        transform: translateY(-4px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Optimized Dropdown */
+    .dropdown {
+        position: relative;
+    }
+
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 160px;
+        background: var(--glass-bg);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid var(--glass-border);
+        border-radius: 12px;
+        padding: 0.5rem;
+        margin-top: 0.5rem;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+        z-index: 100;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .dropdown-menu.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .dropdown-item {
+        display: block;
+        padding: 0.75rem;
+        color: var(--text-secondary);
+        border-radius: 8px;
+        transition: all 0.2s ease;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.875rem;
+        text-decoration: none;
+    }
+
+    .dropdown-item:hover {
+        background: rgba(139, 92, 246, 0.1);
+        color: var(--text-primary);
+        text-decoration: none;
+        transform: translateX(4px);
+    }
+
+    /* Minimal Professional Terminal */
+    .terminal {
+        background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+        border: 1px solid #333;
+        border-radius: 12px;
+        font-family: 'JetBrains Mono', monospace;
+        color: #00ff41;
+        padding: 1.5rem;
+        margin-top: 2rem;
+        box-shadow: 
+            0 0 20px rgba(0, 255, 65, 0.05),
+            0 10px 30px rgba(0, 0, 0, 0.3);
+        position: relative;
+        overflow: hidden;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Minimal Terminal scanning line */
+    .terminal::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, 
+            transparent, 
+            rgba(0, 255, 65, 0.6), 
+            transparent
+        );
+        animation: scan 4s linear infinite;
+    }
+
+    @keyframes scan {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+
+    .terminal-header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid #333;
+    }
+
+    .terminal-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+    }
+
+    .terminal-dot.red { background: #ff5f56; }
+    .terminal-dot.yellow { background: #ffbd2e; }
+    .terminal-dot.green { background: #27ca3f; }
+
+    .terminal-title {
+        color: #666;
+        font-size: 0.75rem;
+        margin-left: auto;
+    }
+
+    .terminal-line {
+        margin-bottom: 0.5rem;
+        font-size: 0.875rem;
+        line-height: 1.4;
+    }
+
+    .terminal-prompt {
+        color: #00ff41;
+        font-weight: 500;
+    }
+
+    .terminal-command {
+        color: #ffffff;
+    }
+
+    .terminal-output {
+        color: #888;
+    }
+
+    .terminal-success {
+        color: #00ff41;
+    }
+
+    .terminal-info {
+        color: #58a6ff;
+    }
+
+    /* Rotating Command Animation */
+    .rotating-command {
+        display: inline-block;
+        min-width: 200px;
+        text-align: left;
+    }
+
+    .command-blink {
+        animation: commandBlink 0.5s ease-in-out;
+    }
+
+    @keyframes commandBlink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.3; }
+    }
+
+    /* Subscription Modal */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .modal-content {
+        background: var(--glass-bg);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid var(--glass-border);
+        border-radius: 20px;
+        padding: 2rem;
+        max-width: 500px;
+        width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+        transform: scale(0.9) translateY(20px);
+        transition: all 0.3s ease;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-overlay.active .modal-content {
+        transform: scale(1) translateY(0);
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .modal-close {
+        background: none;
+        border: none;
+        color: var(--text-secondary);
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .modal-close:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--text-primary);
+    }
+
+    .subscription-features {
+        list-style: none;
+        margin: 1.5rem 0;
+    }
+
+    .subscription-features li {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 0.75rem;
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+    }
+
+    .subscription-features .check-icon {
+        color: var(--accent-green);
+        flex-shrink: 0;
+    }
+
+    /* Mobile Navigation */
+    .mobile-menu-btn {
+        display: none;
+    }
+
+    .mobile-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: linear-gradient(
+            135deg,
+            rgba(24, 28, 36, 0.85) 0%,
+            rgba(24, 28, 36, 0.90) 50%,
+            rgba(16, 20, 28, 0.95) 100%
+        );
+        backdrop-filter: blur(40px) saturate(180%) brightness(0.8);
+        -webkit-backdrop-filter: blur(40px) saturate(180%) brightness(0.8);
+        
+        /* Glass Border Effect */
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-top: none;
+        padding: 1.25rem 1rem;
+        box-shadow:
+            0 10px 30px rgba(0, 0, 0, 0.3),
+            inset 0 0 0.5px rgba(255, 255, 255, 0.1);
+        border-radius: 0 0 16px 16px;
+        z-index: 999;
+        transition: all 0.3s ease-in-out;
+    }
+    
+
+    .navbar-links {
+        display: flex;
+    }
+
+    @media (max-width: 768px) {
+        .navbar-links {
+            display: none !important;
+        }
+        
+        .mobile-menu-btn {
+            display: block !important;
+        }
+        
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(24, 28, 36, 0.98); /* Almost completely opaque */
+            backdrop-filter: blur(50px) saturate(150%);
+            -webkit-backdrop-filter: blur(40px) saturate(180%) brightness(0.8);
+            /* Glass Border Effect */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .mobile-menu.active {
+            display: block !important;
+        }
+        
+        .mobile-menu-link {
+            display: block;
+            padding: 0.75rem 0;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-color);
+            font-family: 'JetBrains Mono', monospace;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .mobile-menu-link:hover {
+            color: var(--text-primary);
+            text-decoration: none;
+            padding-left: 1rem;
+        }
+
+        .mobile-menu-link:last-child {
+            border-bottom: none;
+        }
+
+        /* Mobile LCP Optimization */
+        .hero-heading {
+            min-height: 150px;
+        }
+
+        .terminal {
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .modal-content {
+            padding: 1.5rem;
+            margin: 1rem;
+        }
+    }
+
+    /* Optimized Animations */
+    .fade-in-up {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.6s ease forwards;
+        will-change: opacity, transform;
+    }
+
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+
+    /* Utility Classes */
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+
+    .text-center { text-align: center; }
+    .text-left { text-align: left; }
+    .text-right { text-align: right; }
+
+    .hidden { display: none; }
+    .block { display: block; }
+    .flex { display: flex; }
+    .inline-flex { display: inline-flex; }
+
+    .items-center { align-items: center; }
+    .justify-center { justify-content: center; }
+    .justify-between { justify-content: space-between; }
+
+    .gap-1 { gap: 0.25rem; }
+    .gap-2 { gap: 0.5rem; }
+    .gap-3 { gap: 0.75rem; }
+    .gap-4 { gap: 1rem; }
+    .gap-6 { gap: 1.5rem; }
+    .gap-8 { gap: 2rem; }
+
+    .p-4 { padding: 1rem; }
+    .p-6 { padding: 1.5rem; }
+    .p-8 { padding: 2rem; }
+
+    .mt-4 { margin-top: 1rem; }
+    .mt-6 { margin-top: 1.5rem; }
+    .mt-8 { margin-top: 2rem; }
+    .mb-4 { margin-bottom: 1rem; }
+    .mb-6 { margin-bottom: 1.5rem; }
+    .mb-8 { margin-bottom: 2rem; }
+
+    .w-full { width: 100%; }
+    .h-full { height: 100%; }
+
+    .rounded { border-radius: 0.375rem; }
+    .rounded-lg { border-radius: 0.5rem; }
+    .rounded-xl { border-radius: 0.75rem; }
+
+    .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+    .shadow-xl { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+
+    /* Code syntax highlighting */
+    .code-keyword { color: #ff7b72; }
+    .code-string { color: #a5d6ff; }
+    .code-number { color: #79c0ff; }
+    .code-comment { color: #8b949e; }
+
+    /* Footer Styles */
+    .footer-minimal {
+        position: relative;
+        z-index: 10;
+        padding: 1rem 0;
+        margin-top: 2rem;
+        width: 100%;
+        pointer-events: auto;
+    }
+
+    .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+        z-index: 10;
+        text-align: center;
+    }
+
+    .footer-copyright {
+        font-size: 0.875rem;
+        color: #94a3b8;
+    }
+
+    .footer-developer {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: 0.875rem;
+        color: #94a3b8;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .developer-link {
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+        color: #94a3b8;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        padding: 0.5rem 0.75rem;
+        border-radius: 8px;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid transparent;
+    }
+
+    .developer-link:hover {
+        color: white;
+        background: rgba(139, 92, 246, 0.1);
+        border-color: rgba(139, 92, 246, 0.3);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+    }
+
+    .social-icon {
+        width: 18px;
+        height: 18px;
+        transition: all 0.3s ease;
+    }
+
+    .developer-link:hover .linkedin-icon {
+        color: #0077b5;
+    }
+
+    .developer-link:hover .github-icon {
+        color: #ffffff;
+    }
+
+    .footer-links {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 0.75rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .footer-links1 {
+        opacity: 0;
+    }
+
+    .footer-link {
+        color: #64748b;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        position: relative;
+        padding: 0.25rem 0;
+    }
+
+    .footer-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: linear-gradient(90deg, #8b5cf6, #ec4899);
+        transition: width 0.3s ease;
+    }
+
+    .footer-link:hover {
+        color: #94a3b8;
+    }
+
+    .footer-link:hover::after {
+        width: 100%;
+    }
+
+    @media (max-width: 640px) {
+        .footer-content {
+            gap: 1rem;
+        }
+        
+        .footer-developer {
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .footer-links {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    }
+
+    .footer-minimal * {
+        font-family: 'JetBrains Mono', monospace !important;
+    }
+
+    /* Progress Bar Styles */
+    .progress-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        z-index: 1001;
+        background: transparent;
+    }
+
+    .progress-bar {
+        height: 100%;
+        background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink));
+        width: 0%;
+        transition: width 0.1s ease-out;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .progress-bar::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent
+        );
+        animation: progress-shine 1.5s infinite;
+    }
+
+    .progress-percentage {
+        position: fixed;
+        bottom: 16px;
+        right: 16px;
+        background: var(--glass-bg);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid var(--glass-border);
+        padding: 6px 12px;
+        border-radius: 8px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+        color: var(--text-primary);
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        z-index: 1001;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .progress-percentage.visible {
+        opacity: 0.8;
+        transform: translateY(0);
+    }
+
+    .progress-percentage:hover {
+        opacity: 1 !important;
+    }
+
+    @media (max-width: 640px) {
+        .progress-percentage {
+            bottom: 12px;
+            right: 12px;
+            padding: 4px 8px;
+            font-size: 11px;
+        }
+    }
+
+    @keyframes progress-shine {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+</style>
+
+<body class="flex flex-col min-h-screen">
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="progress-percentage" id="progressPercentage">0%</div>
+    
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="flex items-center justify-between py-4">
+                <a href="{% url 'home' %}" class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-500/20 flex items-center justify-center">
+                        <img src="{% static 'images/acedca.svg' %}" alt="Ace.DCA Logo" class="w-6 h-6" width="24" height="24">
+                    </div>
+                    <span class="font-mono text-xl font-bold gradient-text">Ace.DCA</span>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <div class="navbar-links items-center gap-8">
+                    <a href="{% url 'home' %}" class="nav-link {% if request.path == '/' %}active{% endif %}">&gt; home</a>
+                    <a href="{% url 'syllabuspage' %}" class="nav-link {% if 'syllabus' in request.path %}active{% endif %}">&gt; syllabus</a>
+                    <div class="dropdown">
+                        <a href="#" class="nav-link" onclick="toggleDropdown(event)">&gt; papers.get()</a>
+                        <div id="papersDropdown" class="dropdown-menu">
+                            <a href="{% url 'resources:Y1' %}" class="dropdown-item">year_1</a>
+                            <a href="{% url 'resources:Y2' %}" class="dropdown-item">year_2</a>
+                            <a href="{% url 'resources:Y3' %}" class="dropdown-item">year_3</a>
+                        </div>
+                    </div>
+
+                    {# --- START ADDITION FOR ADMIN LINK (DESKTOP) --- #}
+                    {% if user.is_staff %}
+                    <a href="{% url 'resources:add' %}" class="nav-link {% if 'resources/add' in request.path %}active{% endif %}">&gt; admin.page()</a>
+                    {% endif %}
+                    {# --- END ADDITION FOR ADMIN LINK (DESKTOP) --- #}
+
+                    {% if not user.is_authenticated %}
+                    <a href="#" onclick="openSubscriptionModal()" class="nav-link">&gt; login()</a>
+                    {% else %}
+                    <div class="flex items-center gap-3">
+                        <span class="font-mono text-sm text-gray-400">{{ user.username }}</span>
+                        <a href="{% url 'logout' %}" class="nav-link">&gt; logout()</a>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle Mobile Menu">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Navigation Menu -->
+            <div class="mobile-menu" id="mobileMenu">
+                <a href="{% url 'home' %}" class="mobile-menu-link">&gt; home</a>
+                <a href="{% url 'syllabuspage' %}" class="mobile-menu-link">&gt; syllabus</a>
+                <a href="{% url 'resources:Y1' %}" class="mobile-menu-link">&gt; year_1</a>
+                <a href="{% url 'resources:Y2' %}" class="mobile-menu-link">&gt; year_2</a>
+                <a href="{% url 'resources:Y3' %}" class="mobile-menu-link">&gt; year_3</a>
+                {# --- START ADDITION FOR ADMIN LINK (MOBILE) --- #}
+                {% if user.is_staff %}
+                <a href="{% url 'resources:add' %}" class="mobile-menu-link">&gt; admin.page()</a>
+                {% endif %}
+                {# --- END ADDITION FOR ADMIN LINK (MOBILE) --- #}
+                {% if not user.is_authenticated %}
+                <a href="#" onclick="openSubscriptionModal()" class="mobile-menu-link">&gt; login()</a>
+                {% else %}
+                <a href="{% url 'logout' %}" class="mobile-menu-link">&gt; logout()</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    
+    <div class="modal-overlay" id="subscriptionModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="text-xl font-bold font-mono gradient-text">Stay Updated</h3>
+                <button class="modal-close" onclick="closeSubscriptionModal()" aria-label="Close Modal">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+                    <i data-lucide="bell" class="w-8 h-8 text-white"></i>
+                </div>
+                <h4 class="text-lg font-semibold mb-2">Get Notified</h4>
+                <p class="text-gray-400 text-sm">Stay informed about new resources and important announcements</p>
+            </div>
+    
+            <ul class="subscription-features">
+                <li>
+                    <i data-lucide="check" class="w-4 h-4 check-icon"></i>
+                    <span>Instant notifications for new study materials</span>
+                </li>
+                <li>
+                    <i data-lucide="check" class="w-4 h-4 check-icon"></i>
+                    <span>Updates on syllabus changes and exam schedules</span>
+                </li>
+                <li>
+                    <i data-lucide="check" class="w-4 h-4 check-icon"></i>
+                    <span>Important academic announcements</span>
+                </li>
+                <li>
+                    <i data-lucide="check" class="w-4 h-4 check-icon"></i>
+                    <span>New PYQ papers and resources alerts</span>
+                </li>
+            </ul>
+    
+            <div class="text-center mb-6">
+                <div class="text-2xl font-bold font-mono gradient-text mb-2">Free Forever</div>
+                <p class="text-gray-400 text-sm">No subscription required </p>
+            </div>
+    
+            <div class="flex flex-col gap-3">
+                <a href="{% url 'login' %}"   class="btn btn-primary w-full justify-center">
+                    <i data-lucide="mail" class="w-4 h-4"></i>
+                    Enable Notifications
+                </a>
+                <button class="btn btn-outline w-full justify-center" onclick="closeSubscriptionModal()">
+                    Maybe Later
+                </button>
+            </div>
+    
+            <p class="text-xs text-gray-500 text-center mt-4">
+                We respect your privacy. No spam, only important updates.
+            </p>
+        </div>
+    </div>
+    
+    <main class="flex-grow">
+        {% block start %}
+        {% endblock %}
+    </main>
+
+    <!-- Enhanced Footer with GitHub -->
+    <footer class="footer-minimal">
+        <div class="footer-content">
+            <div class="footer-copyright">
+                <span class="font-mono text-gray-400">© 2025 Ace.DCA. All rights reserved.</span>
+            </div>
+            
+            <div class="footer-developer">
+                <span class="font-mono text-gray-400">Developed by</span>
+                <a href="https://www.linkedin.com/in/jatin-gera" target="_blank" rel="noopener" class="developer-link">
+                    <svg class="social-icon linkedin-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                    <span class="font-mono">@jatingera</span>
+                </a>
+                <a href="https://github.com/stdygit" target="_blank" rel="noopener" class="developer-link">
+                    <svg class="social-icon github-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    <span class="font-mono">@stdygit</span>
+                </a>
+            </div>
+            
+            <div class="footer-links">
+                <a href="{% url 'terms' %}" class="footer-link font-mono">Terms of Service</a>
+                <span class="font-mono text-gray-500">|</span>
+                <a href="{% url 'privacy' %}" class="footer-link font-mono">Privacy Policy</a>
+                <span class="font-mono text-gray-500">|</span>
+                <a href="{% url 'aboutdev' %}" class="footer-link font-mono">About Developer</a>
+            </div> 
+            
+        <div class="footer-links1">
+                <a href="{% url 'terms' %}" class="footer-link font-mono">Terms of Service</a>
+                <span class="font-mono text-gray-500">|</span>
+                <a href="{% url 'privacy' %}" class="footer-link font-mono">Privacy Policy</a>
+                <span class="font-mono text-gray-500">|</span>
+                <a href="/contact" class="footer-link font-mono">Contact</a>
+            </div>  
+        </div>
+    </footer>
+
+    
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Lucide icons
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+
+            // Progress Bar Functionality
+            const progressBar = document.getElementById('progressBar');
+            const progressPercentage = document.getElementById('progressPercentage');
+            let scrollTimeout;
+            let lastScrollTop = 0;
+            let hideTimeout;
+            
+            function updateProgress() {
+                const scrollTop = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight;
+                const winHeight = window.innerHeight;
+                const scrollPercent = (scrollTop / (docHeight - winHeight)) * 100;
+                
+                // Update progress bar with precise calculation
+                const precisePercent = Math.min(100, Math.max(0, scrollPercent));
+                progressBar.style.width = precisePercent.toFixed(2) + '%';
+                
+                // Update percentage display
+                progressPercentage.textContent = precisePercent.toFixed(1) + '%';
+                
+                // Show percentage when scrolling
+                progressPercentage.classList.add('visible');
+                
+                // Clear any existing hide timeout
+                if (hideTimeout) {
+                    clearTimeout(hideTimeout);
+                }
+                
+                // Hide percentage after scrolling stops
+                hideTimeout = setTimeout(() => {
+                    progressPercentage.classList.remove('visible');
+                }, 1500);
+                
+                lastScrollTop = scrollTop;
+            }
+
+            // Throttled scroll event handler
+            function handleScroll() {
+                if (!scrollTimeout) {
+                    scrollTimeout = setTimeout(function() {
+                        updateProgress();
+                        scrollTimeout = null;
+                    }, 10);
+                }
+            }
+
+            // Update progress on scroll with throttling
+            window.addEventListener('scroll', handleScroll, { passive: true });
+            
+            // Update progress on resize
+            window.addEventListener('resize', updateProgress, { passive: true });
+            
+            // Initial progress update
+            updateProgress();
+        });
+        
+        // Toggle dropdown menu
+        function toggleDropdown(event) {
+            event.preventDefault();
+            const dropdown = document.getElementById('papersDropdown');
+            dropdown.classList.toggle('active');
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function closeDropdown(e) {
+                if (!e.target.closest('.dropdown')) {
+                    dropdown.classList.remove('active');
+                    document.removeEventListener('click', closeDropdown);
+                }
+            });
+        }
+        
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-menu-link').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mobileMenu').classList.remove('active');
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            
+            if (mobileMenu && !mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        // Subscription Modal Functions
+        function openSubscriptionModal() {
+            const modal = document.getElementById('subscriptionModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSubscriptionModal() {
+            const modal = document.getElementById('subscriptionModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('subscriptionModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeSubscriptionModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeSubscriptionModal();
+            }
+        });
+    </script>
+</body>
+</html>

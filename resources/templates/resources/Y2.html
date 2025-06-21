@@ -1,0 +1,128 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block title %}Year 1 Semester Selection - Ace.DCA{% endblock %}
+{% block meta_description %}Select your semester to access comprehensive academic resources for Year 1 studies.{% endblock %}
+
+{% block start %}
+<div class="container py-8">
+    <!-- Simple Header with Mobile-Friendly Title -->
+    <div class="text-center mb-8">
+        <h1 class="text-xl sm:text-3xl md:text-4xl font-bold mb-4 px-2">
+            <span class="font-mono gradient-text break-words">Academic.getSemesters()</span>
+        </h1>
+        <p class="text-gray-400 font-mono text-sm">
+            <span class="code-comment">// Select your semester to access resources</span>
+        </p>
+    </div>
+
+    <!-- Simple Semester Cards Grid -->
+    <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 max-w-4xl mx-auto px-3 sm:px-0">
+        {% for i in sem %}
+        <div class="semester-card">
+            <a href="{% url 'Sem1' i.id %}" class="block p-5">
+                <div class="flex flex-col">
+                    <!-- Semester Header -->
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500/20 to-cyan-500/20 border border-purple-500/30 flex items-center justify-center mr-4">
+                            <span class="text-lg font-bold text-white font-mono">{{ i.id }}</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white font-mono">{{ i }}</h3>
+                            <p class="text-xs text-gray-400 font-mono">
+                                <span class="code-comment">// semester {{ i.id }}</span>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Simple Resource List -->
+                    <div class="text-gray-400 mb-4 font-mono text-xs">
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Previous year papers</li>
+                            <li>Study materials</li>
+                            <li>Video tutorials</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Action Button -->
+                    <div class="mt-auto">
+                        <div class="flex justify-end">
+                            <div class="flex items-center text-cyan-400 font-mono text-sm">
+                                <span class="code-keyword">explore</span>()
+                                <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <!-- Navigation -->
+    <div class="mt-20 flex justify-center">
+        <a href="javascript:history.back()" class="flex items-center text-gray-400 hover:text-white transition-colors font-mono">
+            <i data-lucide="arrow-left" class="w-4 h-4 mr-2"></i>
+            <span class="code-keyword">return</span>
+        </a>
+    </div>
+</div>
+
+<style>
+    /* Simple Semester Card Styles */
+    .semester-card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid var(--glass-border);
+        border-radius: 16px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        height: 100%;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .semester-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(139, 92, 246, 0.4);
+        box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
+    }
+    
+    .semester-card a {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+        height: 100%;
+    }
+    
+    .semester-card:hover a {
+        text-decoration: none;
+        color: inherit;
+    }
+    
+    /* Mobile-Friendly Title */
+    .break-words {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+    
+    /* Footer Fix */
+    footer.footer-minimal {
+        position: relative;
+        z-index: 10;
+        padding: 1rem 0;
+        margin-top: 2rem;
+        width: 100%;
+        pointer-events: auto;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize Lucide icons
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    });
+</script>
+{% endblock %}

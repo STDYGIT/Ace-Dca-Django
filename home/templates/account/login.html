@@ -1,0 +1,164 @@
+{% load socialaccount %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="../">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--dark-bg);
+            background: url("../static/images/bg.svg"),
+                linear-gradient(to top, rgb(0, 0, 0) 0%, rgba(4, 0, 4, 0.215) 1000%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 49%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 20rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 1rem;
+            margin: 0 auto;
+            flex-direction: column;
+            /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+            /* background-color: rgba(0, 0, 0, 0.5); Optional: Add a background color for better visibility */
+        }
+        .top{
+            display:  flex;
+            align-items: center;
+            justify-content: center;
+        }
+        header svg {
+            flex-shrink: 0;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            display: flex;
+
+        }
+
+        .box {
+            height: auto;
+            width: 20rem;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(2px);
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .button {
+            width: 100%;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #3333333e;
+            color: white;
+            height: 60px;
+        }
+
+        .google-signin div {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .google-signin svg {
+            margin-right: 0.2rem;
+        }
+
+        .google-signin h5 {
+            margin: 0;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="top">
+            <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g filter="url(#filter0_f_1532_3039)">
+                    <path
+                        d="M16 37.5758C16 39.3945 18.1051 40.5663 19.8584 39.7179L26.2602 36.6149L27.56 26.2043L28.8648 36.6149L35.2666 39.7179C37.0199 40.5663 39.125 39.3992 39.125 37.5758C39.125 37.2477 39.0536 36.9196 38.9109 36.6149L29.8893 17.4062C29.0075 15.5313 26.1175 15.5313 25.2357 17.4062L16.2141 36.6149C16.0714 36.9196 16 37.2477 16 37.5758Z"
+                        fill="url(#paint0_radial_1532_3039)" />
+                </g>
+                <path
+                    d="M16.9688 36.687C16.9688 38.3541 18.8984 39.4283 20.5056 38.6506L26.374 35.8062L27.5654 26.2631L28.7615 35.8062L34.6298 38.6506C36.237 39.4283 38.1667 38.3584 38.1667 36.687C38.1667 36.3862 38.1013 36.0855 37.9704 35.8062L29.7006 18.1982C28.8923 16.4795 26.2431 16.4795 25.4348 18.1982L17.165 35.8062C17.0342 36.0855 16.9688 36.3862 16.9688 36.687Z"
+                    fill="url(#paint1_radial_1532_3039)" />
+                <defs>
+                    <filter id="filter0_f_1532_3039" x="0" y="0" width="55.125" height="56" filterUnits="userSpaceOnUse"
+                        color-interpolation-filters="sRGB">
+                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                        <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                        <feGaussianBlur stdDeviation="8" result="effect1_foregroundBlur_1532_3039" />
+                    </filter>
+                    <radialGradient id="paint0_radial_1532_3039" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+                        gradientTransform="translate(27.8026 16) rotate(90) scale(20.7559 154.183)">
+                        <stop stop-color="#C0E5FF" />
+                        <stop offset="0.316337" stop-color="#70C5FE" />
+                        <stop offset="""0.610801" stop-color="#34ADFF" />
+                        <stop offset="1" stop-color="#0098FF" />
+                    </radialGradient>
+                    <radialGradient id="paint1_radial_1532_3039" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+                        gradientTransform="translate(27.7878 16.9092) rotate(90) scale(19.0262 141.335)">
+                        <stop stop-color="#9ED7FE" />
+                        <stop offset="0.316337" stop-color="#70C5FE" />
+                        <stop offset="0.610801" stop-color="#34ADFF" />
+                        <stop offset="1" stop-color="#1189FF" />
+                    </radialGradient>
+                </defs>
+            </svg>
+            <h1>Ace Dca</h1>
+        </div>
+    </header>
+
+    <div class="box">
+        <a href="{% url 'login' %}">
+        <button class="button google-signin">
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="20px" height="20px">
+                    <path fill="#FFC107"
+                        d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z" />
+                    <path fill="#FF3D00"
+                        d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z" />
+                    <path fill="#4CAF50"
+                        d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z" />
+                    <path fill="#1976D2"
+                        d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z" />
+                </svg>
+                <h5>Sign in to Ace Dca</h5>
+            </div>
+        </button>
+    </a>
+    </div>
+</body>
+
+</html>

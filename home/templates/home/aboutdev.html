@@ -1,0 +1,221 @@
+{% extends 'home/base.html' %}
+
+{% load static %}
+
+{% block title %}About Developer - Jatin Gera | Ace DCA{% endblock %}
+
+{% block meta_description %}Meet Jatin Gera, the developer behind Ace DCA. Full Stack Developer passionate about educational technology.{% endblock %}
+
+{% block meta_keywords %}Jatin Gera, Ace DCA developer, full stack developer, educational technology{% endblock %}
+
+{% block canonical_url %}https://acedca.in/about-developer{% endblock %}
+
+{% block og_title %}About Developer - Jatin Gera | Ace DCA{% endblock %}
+{% block og_description %}Meet the developer behind Ace DCA and learn about his passion for educational technology.{% endblock %}
+{% block og_url %}https://acedca.in/about-developer{% endblock %}
+
+{% block start %}
+<div class="container mx-auto px-4 py-8 max-w-4xl">
+    <!-- Header -->
+    <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold font-mono gradient-text mb-4">About Developer</h1>
+        <div class="code-comment mb-4">
+            // The mind behind Ace DCA
+        </div>
+    </div>
+
+    <!-- Developer Profile -->
+    <div class="grid md:grid-cols-3 gap-8 mb-12">
+        <!-- Profile Image & Info -->
+        <div class="text-center">
+            <div class="relative inline-block group mb-4">
+                <div class="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-pink-500/20 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-gradient-x"></div>
+                <img style="width: 64px;" src="{% static 'images/jg.png' %}" alt="Memoji" class="relative z-10 transition-transform duration-300 group-hover:scale-110">
+            </div>
+            <h2 class="text-2xl font-bold font-mono gradient-text">Jatin Gera</h2>
+            <p class="text-purple-400 font-mono text-sm mb-4">Full Stack Developer</p>
+            
+            <!-- Social Links -->
+            <div class="flex gap-3 justify-center">
+                <a 
+                    href="https://www.linkedin.com/in/jatin-gera/" 
+                    target="_blank" 
+                    rel="noopener"
+                    class="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors text-white text-sm font-mono"
+                >
+                    <i data-lucide="linkedin" class="w-4 h-4"></i>
+                    LinkedIn
+                </a>
+                <a 
+                    href="https://github.com/stdygit" 
+                    target="_blank" 
+                    rel="noopener"
+                    class="flex items-center gap-2 px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors text-white text-sm font-mono"
+                >
+                    <i data-lucide="github" class="w-4 h-4"></i>
+                    GitHub
+                </a>
+            </div>
+            
+            <!-- Contact -->
+            <div class="mt-6 pt-6 border-t border-gray-700">
+                <h4 class="text-sm font-mono text-purple-400 mb-3">Contact</h4>
+                <a 
+                    href="mailto:acedca.ac@gmail.com" 
+                    class="inline-flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
+                >
+                    <i data-lucide="mail" class="w-4 h-4"></i>
+                    acedca.ac@gmail.com
+                </a>
+            </div>
+        </div>
+
+        <!-- About Content -->
+        <div class="md:col-span-2">
+            <h3 class="text-xl font-bold font-mono text-white mb-4">About</h3>
+            <div class="space-y-4 text-gray-300 leading-relaxed">
+                <p>
+                    I'm a passionate Full Stack Developer with expertise in modern web technologies and cloud infrastructure. 
+                    Currently pursuing dual degrees in Computer Science and Data Science, I focus on building innovative 
+                    solutions that address real educational challenges.
+                </p>
+                
+                <p>
+                    As the creator of <span class="text-purple-400 font-mono">Ace DCA</span>, I identified the fragmented 
+                    nature of academic resources and developed a comprehensive platform to centralize study materials, 
+                    syllabi, and previous year questions. My goal is to empower students with accessible, organized 
+                    educational resources.
+                </p>
+            </div>
+
+            <!-- Skills -->
+            <div class="mt-6">
+                <h4 class="text-lg font-mono text-purple-400 mb-3">Technical Expertise</h4>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-gray-700 rounded-full text-sm font-mono text-gray-300">Python</span>
+                    <span class="px-3 py-1 bg-gray-700 rounded-full text-sm font-mono text-gray-300">Django</span>
+                    <span class="px-3 py-1 bg-gray-700 rounded-full text-sm font-mono text-gray-300">JavaScript</span>
+                    <span class="px-3 py-1 bg-gray-700 rounded-full text-sm font-mono text-gray-300">HTML/CSS</span>
+                    <span class="px-3 py-1 bg-gray-700 rounded-full text-sm font-mono text-gray-300">PostgreSQL</span>
+                    <span class="px-3 py-1 bg-gray-700 rounded-full text-sm font-mono text-gray-300">AWS</span>
+                    <span class="px-3 py-1 bg-gray-700 rounded-full text-sm font-mono text-gray-300">MinIO</span>
+                    <span class="px-3 py-1 bg-gray-700 rounded-full text-sm font-mono text-gray-300">CI/CD</span>
+                    <span class="px-3 py-1 bg-gray-700 rounded-full text-sm font-mono text-gray-300">Cloud Deployment</span>
+                </div>
+            </div>
+            
+            <!-- Professional Interests -->
+            <div class="mt-6">
+                <h4 class="text-lg font-mono text-purple-400 mb-3">Professional Interests</h4>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-purple-500/20 border border-purple-500/30 rounded-full text-sm font-mono text-gray-300">Educational Technology</span>
+                    <span class="px-3 py-1 bg-blue-500/20 border border-blue-500/30 rounded-full text-sm font-mono text-gray-300">Web Development</span>
+                    <span class="px-3 py-1 bg-green-500/20 border border-green-500/30 rounded-full text-sm font-mono text-gray-300">Data Science</span>
+                    <span class="px-3 py-1 bg-pink-500/20 border border-pink-500/30 rounded-full text-sm font-mono text-gray-300">Cloud Architecture</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Experience & Education -->
+    <div class="grid md:grid-cols-2 gap-8 mb-12">
+        <!-- Experience -->
+        <div>
+            <h3 class="text-xl font-bold font-mono text-white mb-4">Experience</h3>
+            
+            <div class="space-y-6">
+                <div class="border-l-2 border-purple-400 pl-4 pb-2">
+                    <h4 class="font-mono text-purple-400">Founder & Lead Developer</h4>
+                    <p class="text-gray-300 text-sm">Ace DCA • 2024 - Present</p>
+                    <p class="text-gray-300 text-sm mt-2">
+                        Designed and developed a comprehensive academic resource platform serving 
+                        Computer Science students. Implemented cloud infrastructure, database architecture, 
+                        and responsive frontend design to create an intuitive user experience.
+                    </p>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- Education -->
+        <div>
+            <h3 class="text-xl font-bold font-mono text-white mb-4">Education</h3>
+            
+            <div class="space-y-6">
+                <div class="border-l-2 border-blue-400 pl-4 pb-2">
+                    <h4 class="font-mono text-blue-400">Bachelor of Computer Science (Hons)</h4>
+                    <p class="text-gray-300 text-sm">CCS University • 2023 - 2026</p>
+                    <p class="text-gray-300 text-sm mt-2">
+                        Pursuing BSc (Hons) in Computer Science with focus on software development, 
+                        algorithms, and systems design.
+                    </p>
+                </div>
+                
+                <div class="border-l-2 border-green-400 pl-4 pb-2">
+                    <h4 class="font-mono text-green-400">Bachelor of Science in Data Science</h4>
+                    <p class="text-gray-300 text-sm">IIT Madras • 2024 - 2028</p>
+                    <p class="text-gray-300 text-sm mt-2">
+                        Concurrent degree in Data Science focusing on statistical analysis, 
+                        machine learning, and data visualization techniques.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Professional Statement -->
+    <div class="bg-gray-800/30 rounded-lg p-6 mb-12">
+        <h3 class="text-xl font-bold font-mono text-white mb-4">Professional Statement</h3>
+        <p class="text-gray-300 leading-relaxed">
+            My mission is to leverage technology to solve educational challenges and create accessible learning resources. 
+            I believe in continuous learning, clean code architecture, and user-centered design. Through Ace DCA, 
+            I aim to demonstrate how thoughtfully designed platforms can significantly enhance the academic experience 
+            for students.
+        </p>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="text-center mt-12 pt-8 border-t border-gray-700">
+        <div class="code-comment mb-4">
+            // Explore what I've built
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="{% url 'home' %}" class="btn btn-primary">
+                <i data-lucide="home" class="w-4 h-4"></i>
+                Back to Home
+            </a>
+            <a href="{% url 'syllabuspage' %}" class="btn btn-outline">
+                <i data-lucide="book-open" class="w-4 h-4"></i>
+                View Resources
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    });
+</script>
+
+<style>
+    @keyframes gradient-x {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+    
+    .animate-gradient-x {
+        background-size: 200% 200%;
+        animation: gradient-x 3s ease infinite;
+    }
+</style>
+{% endblock %}

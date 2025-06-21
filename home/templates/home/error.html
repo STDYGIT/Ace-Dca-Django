@@ -1,0 +1,20 @@
+{% extends "home/base.html" %}
+{% block title %}Page Not Found - 404{% endblock %}
+
+{% block start %}
+<style>
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 70vh; /* Adjust to push footer down */
+        text-align: center;
+    }
+</style>
+<main class="min-h-screen flex flex-col justify-center items-center text-center">
+    <h1 class="text-5xl font-bold text-pink-500 mb-4">{{ title }}</h1>
+    <p class="text-gray-400 mb-6">{{ message }}</p>
+    <a href="{% url 'home' %}" class="btn btn-outline">← Back to Home</a>
+</main>
+{% endblock %}
